@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "motion/react";
 import { 
   GraduationCap, Calendar, Compass, Star, TrendingUp, Handshake, 
@@ -13,6 +13,27 @@ interface TrainingAndDevelopmentProps {
 export const TrainingAndDevelopment: React.FC<TrainingAndDevelopmentProps> = ({
   onLetsFindPath,
 }) => {
+
+  useEffect(() => {
+    const scrollToHash = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const id = hash.replace("#", "");
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }
+    };
+
+    const timer = setTimeout(scrollToHash, 250);
+
+    window.addEventListener("hashchange", scrollToHash);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("hashchange", scrollToHash);
+    };
+  }, []);
 
   const whatMakesUsDifferent = [
     {
@@ -150,7 +171,7 @@ export const TrainingAndDevelopment: React.FC<TrainingAndDevelopmentProps> = ({
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {pathways.map((path) => (
-              <GlassCard key={path.id} className="relative p-6 flex flex-col justify-between h-full hover:border-[#1E3A8A] transition-all">
+              <GlassCard key={path.id} id={path.id} className="relative p-6 flex flex-col justify-between h-full hover:border-[#1E3A8A] transition-all">
                 <div>
                   <div className="flex justify-between items-center mb-4">
                     <span className="text-[10px] font-mono font-extrabold bg-[#0EA5E9]/10 text-[#0EA5E9] px-2.5 py-1 rounded">

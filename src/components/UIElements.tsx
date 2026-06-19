@@ -7,15 +7,18 @@ interface GlassCardProps {
   children: React.ReactNode;
   className?: string;
   hoverEffect?: boolean;
+  id?: string;
 }
 
 export const GlassCard: React.FC<GlassCardProps> = ({
   children,
   className = "",
   hoverEffect = true,
+  id,
 }) => {
   return (
     <motion.div
+      id={id}
       className={`relative overflow-hidden rounded-2xl border border-white/20 bg-[#F1F5FF] p-6 shadow-[0_8px_32px_0_rgba(30,58,138,0.06)] ${className}`}
       whileHover={hoverEffect ? { y: -4, boxShadow: "0_12px_40px_0_rgba(30,58,138,0.12)" } : undefined}
       transition={{ duration: 0.3, ease: "easeOut" }}

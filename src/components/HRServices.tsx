@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   Users, Layers, ShieldCheck, PieChart, Play, CheckCircle2,
@@ -14,6 +14,28 @@ export const HRServices: React.FC<HRServicesProps> = ({ onBookCall }) => {
   const [activeDashboardKPIs, setActiveDashboardKPIs] = useState<string[]>([
     "headcount", "attrition", "diversity"
   ]);
+
+  useEffect(() => {
+    const scrollToHash = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const id = hash.replace("#", "");
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }
+    };
+
+    // Delay scroll slightly to ensure page layout and elements have fully hydrated/rendered
+    const timer = setTimeout(scrollToHash, 250);
+
+    window.addEventListener("hashchange", scrollToHash);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("hashchange", scrollToHash);
+    };
+  }, []);
 
   const strategicServices = [
     {
@@ -113,7 +135,7 @@ export const HRServices: React.FC<HRServicesProps> = ({ onBookCall }) => {
           {strategicServices.map((srv) => {
             const IconComponent = srv.icon;
             return (
-              <GlassCard key={srv.id} className="relative p-6 flex flex-col justify-between group h-full">
+              <GlassCard key={srv.id} id={srv.id} className="relative p-6 flex flex-col justify-between group h-full">
                 <div>
                   <div className="h-12 w-12 rounded-xl bg-[#1E3A8A]/5 flex items-center justify-center text-[#1E3A8A] group-hover:bg-[#0EA5E9]/10 group-hover:text-[#0EA5E9] transition-all mb-5">
                     <IconComponent className="h-6 w-6" />

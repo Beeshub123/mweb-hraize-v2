@@ -4,6 +4,37 @@ import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronDown, Menu, X, ArrowUpRight } from "lucide-react";
+const serviceCategories = [
+  {
+    title: "HR Services",
+    href: "/hr-services",
+    items: [
+      { name: "HR Subscription Support", href: "/hr-services#support" },
+      { name: "HR Consulting & Systems Setup", href: "/hr-services#consulting" },
+      { name: "HR Audit", href: "/hr-services#audit" },
+      { name: "People Analytics & Dashboard", href: "/hr-services#analytics" },
+      { name: "HR Policy and Process Documentation", href: "/hr-services#policies" },
+      { name: "Strategic Workforce Planning", href: "/hr-services#workforce" },
+    ],
+  },
+  {
+    title: "Recruitment Services",
+    href: "/recruitment",
+    items: [
+      { name: "Permanent Recruitment", href: "/recruitment#permanent" },
+      { name: "Contract & Temp Staffing", href: "/recruitment#contract" },
+    ],
+  },
+  {
+    title: "Training and Development",
+    href: "/training",
+    items: [
+      { name: "Fresher to professional", href: "/training#fresher" },
+      { name: "Mid Career Acceleration", href: "/training#mid-career" },
+      { name: "First-Time Managers", href: "/training#manager" },
+    ],
+  },
+];
 
 export const Navbar: React.FC = () => {
   const pathname = usePathname();
@@ -65,7 +96,10 @@ export const Navbar: React.FC = () => {
           </Link>
 
           {/* Services Dropdown */}
-          <div className="relative">
+          <div
+            className="relative"
+            onMouseLeave={() => setServicesOpen(false)}
+          >
             <button
               onClick={() => setServicesOpen(!servicesOpen)}
               onMouseEnter={() => setServicesOpen(true)}
@@ -84,36 +118,37 @@ export const Navbar: React.FC = () => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
-                  onMouseLeave={() => setServicesOpen(false)}
-                  className="absolute left-1/2 z-50 mt-3 w-56 -translate-x-1/2 rounded-xl border border-slate-700 bg-[#1E293B] p-2 shadow-xl ring-1 ring-black/5"
+                  className="absolute left-1/2 z-50 top-full pt-3 -translate-x-1/2"
                 >
-                  <Link
-                    href="/hr-services"
-                    onClick={closeMenus}
-                    className={`block w-full rounded-lg px-4 py-2 text-xs font-semibold text-white hover:bg-[#1E3A8A] hover:text-white transition ${
-                      isActive("/hr-services") ? "bg-[#1E3A8A] text-[#0EA5E9]" : ""
-                    }`}
-                  >
-                    HR Consulting & Systems
-                  </Link>
-                  <Link
-                    href="/recruitment"
-                    onClick={closeMenus}
-                    className={`block w-full rounded-lg px-4 py-2 text-xs font-semibold text-white hover:bg-[#1E3A8A] hover:text-white transition ${
-                      isActive("/recruitment") ? "bg-[#1E3A8A] text-[#0EA5E9]" : ""
-                    }`}
-                  >
-                    Recruitment Services
-                  </Link>
-                  <Link
-                    href="/training"
-                    onClick={closeMenus}
-                    className={`block w-full rounded-lg px-4 py-2 text-xs font-semibold text-white hover:bg-[#1E3A8A] hover:text-white transition ${
-                      isActive("/training") ? "bg-[#1E3A8A] text-[#0EA5E9]" : ""
-                    }`}
-                  >
-                    Training & Development
-                  </Link>
+                  <div className="w-[640px] md:w-[760px] lg:w-[840px] rounded-2xl border border-slate-700 bg-[#1E293B] p-6 shadow-2xl ring-1 ring-black/5">
+                    <div className="grid grid-cols-3 gap-8">
+                      {serviceCategories.map((cat, idx) => (
+                        <div key={idx} className="space-y-4 text-left">
+                          <Link
+                            href={cat.href}
+                            onClick={closeMenus}
+                            className="block text-sm font-extrabold uppercase tracking-wider text-[#0EA5E9] hover:text-[#38BDF8] transition-colors"
+                          >
+                            {cat.title}
+                          </Link>
+                          <ul className="space-y-3">
+                            {cat.items.map((item, itemIdx) => (
+                              <li key={itemIdx}>
+                                <Link
+                                  href={item.href}
+                                  onClick={closeMenus}
+                                  className="flex items-center text-xs font-semibold text-slate-300 hover:text-white transition-all duration-200 hover:translate-x-1 transform"
+                                >
+                                  <span className="h-2.5 w-2.5 rounded-full border-2 border-[#F59E0B] flex-shrink-0 mr-2.5" />
+                                  <span>{item.name}</span>
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -179,29 +214,33 @@ export const Navbar: React.FC = () => {
             </Link>
             
             {/* Services under Mobile */}
-            <div className="border-l-2 border-[#0EA5E9] ml-2 pl-3 space-y-1">
-              <p className="text-xs font-bold text-gray-400 tracking-widest uppercase py-1">Services</p>
-              <Link
-                href="/hr-services"
-                onClick={closeMenus}
-                className="block w-full px-3 py-1.5 text-sm font-medium text-white hover:text-[#0EA5E9]"
-              >
-                — HR Consulting & Systems
-              </Link>
-              <Link
-                href="/recruitment"
-                onClick={closeMenus}
-                className="block w-full px-3 py-1.5 text-sm font-medium text-white hover:text-[#0EA5E9]"
-              >
-                — Recruitment Services
-              </Link>
-              <Link
-                href="/training"
-                onClick={closeMenus}
-                className="block w-full px-3 py-1.5 text-sm font-medium text-white hover:text-[#0EA5E9]"
-              >
-                — Training & Development
-              </Link>
+            <div className="border-l-2 border-[#0EA5E9] ml-2 pl-3 space-y-3">
+              <p className="text-xs font-extrabold text-gray-400 tracking-widest uppercase py-1">Services</p>
+              
+              {serviceCategories.map((cat, idx) => (
+                <div key={idx} className="space-y-1.5">
+                  <Link
+                    href={cat.href}
+                    onClick={closeMenus}
+                    className="block w-full px-3 py-0.5 text-sm font-bold text-[#0EA5E9] hover:text-[#38BDF8]"
+                  >
+                    {cat.title}
+                  </Link>
+                  <div className="pl-4 space-y-1.5">
+                    {cat.items.map((item, itemIdx) => (
+                      <Link
+                        key={itemIdx}
+                        href={item.href}
+                        onClick={closeMenus}
+                        className="flex items-center w-full px-3 py-0.5 text-xs font-medium text-slate-300 hover:text-white"
+                      >
+                        <span className="h-2 w-2 rounded-full border border-[#F59E0B] flex-shrink-0 mr-2" />
+                        <span>{item.name}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
 
             <Link

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "motion/react";
 import {
   CheckCircle, XCircle, Users, Award, Briefcase, ChevronRight,
@@ -15,6 +15,27 @@ export const RecruitmentServices: React.FC<RecruitmentServicesProps> = ({
   onEmployerClick,
   onCandidateClick,
 }) => {
+
+  useEffect(() => {
+    const scrollToHash = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const id = hash.replace("#", "");
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }
+    };
+
+    const timer = setTimeout(scrollToHash, 250);
+
+    window.addEventListener("hashchange", scrollToHash);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("hashchange", scrollToHash);
+    };
+  }, []);
 
   const corePillars = [
     {
@@ -41,16 +62,19 @@ export const RecruitmentServices: React.FC<RecruitmentServicesProps> = ({
 
   const hiringModels = [
     {
+      id: "permanent",
       title: "Permanent Placement",
       desc: "Full-time positions for your core team. We handle sourcing, screening, coaching, and placement. 60-day replacement guarantee included.",
       tag: "Core Team"
     },
     {
+      id: "contract",
       title: "Contract & Temporary Staffing",
       desc: "Project-based, seasonal, or interim roles. We source and place professionals on flexible terms from 3 months to 12 months.",
       tag: "Flexible Output"
     },
     {
+      id: "graduate",
       title: "Graduate & Emerging Talent Pipeline",
       desc: "Build your bench before you need it. We identify high-potential graduates, freshers, and early-career professionals ready and hungry to prove themselves.",
       tag: "Next Generation"
@@ -207,7 +231,7 @@ export const RecruitmentServices: React.FC<RecruitmentServicesProps> = ({
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {hiringModels.map((m, idx) => (
-              <GlassCard key={idx} className="p-6 h-full flex flex-col justify-between" hoverEffect={true}>
+              <GlassCard key={idx} id={m.id} className="p-6 h-full flex flex-col justify-between" hoverEffect={true}>
                 <div>
                   <div className="flex justify-between items-center mb-4">
                     <span className="text-[10px] font-mono font-bold bg-[#1E3A8A]/10 text-[#1E3A8A] px-2.5 py-1 rounded">
