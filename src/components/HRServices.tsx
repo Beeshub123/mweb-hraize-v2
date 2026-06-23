@@ -315,7 +315,7 @@ export const HRServices: React.FC<HRServicesProps> = ({ onBookCall }) => {
           </div>
         </div>
 
-        <div className="text-center max-w-3xl mx-auto bg-cream-50 border border-sky-600/50 rounded-3xl p-8 sm:p-12">
+        <div className="shadow-lg text-center max-w-3xl mx-auto bg-cream-50 border border-sky-600/10 rounded-3xl p-8 sm:p-12">
           <SectionLabel>Workforce Architecture</SectionLabel>
           <h3 className="mt-3 text-2xl sm:text-3xl font-black text-navy-900 uppercase tracking-tight">
             Ready to Have Your People Partner Today

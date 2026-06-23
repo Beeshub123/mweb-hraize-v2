@@ -160,7 +160,7 @@ export const RecruitmentServices: React.FC<RecruitmentServicesProps> = ({
             </h3>
             <div className="space-y-4">
               {corePillars.map((p, idx) => (
-                <div key={idx} className="flex gap-4 items-start p-4 rounded-xl bg-cream-50 border border-sky-600/50 hover:border-sky-600/50 transition-colors">
+                <div key={idx} className="shadow-md flex gap-4 items-start p-4 rounded-xl bg-cream-50 border border-sky-600/10 hover:border-sky-600/50 transition-colors">
                   <FeatureCheck>{p.title}</FeatureCheck>
                 </div>
               ))}

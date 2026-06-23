@@ -135,14 +135,14 @@ export const Navbar: React.FC = () => {
                   exit={{ opacity: 0, y: 10 }}
                   className="absolute left-1/2 z-50 top-full pt-3 -translate-x-1/2"
                 >
-                  <div className="w-[640px] md:w-[760px] lg:w-[840px] rounded-2xl border border-sky-600/50 bg-navy-card p-6 shadow-2xl">
+                  <div className="w-[640px] md:w-[760px] lg:w-[840px] rounded-2xl border border-sky-200/50 bg-cream-50 p-6 shadow-2xl">
                     <div className="grid grid-cols-3 gap-8">
                       {serviceCategories.map((cat, idx) => (
                         <div key={idx} className="space-y-4 text-left">
                           <Link
                             href={cat.href}
                             onClick={closeMenus}
-                            className="block text-sm font-extrabold uppercase tracking-wider text-sky-400 hover:text-sky-300 transition-colors"
+                            className="block text-sm font-extrabold uppercase tracking-wider text-sky-600 hover:text-sky-700 transition-colors"
                           >
                             {cat.title}
                           </Link>
@@ -152,7 +152,7 @@ export const Navbar: React.FC = () => {
                                 <Link
                                   href={item.href}
                                   onClick={closeMenus}
-                                  className="flex items-center text-xs font-semibold text-sage-100/60 hover:text-white transition-all duration-200 hover:translate-x-1"
+                                  className="flex items-center text-xs font-semibold text-navy-900/60 hover:text-navy-900 transition-all duration-200 hover:translate-x-1"
                                 >
                                   <span className="h-2 w-2 bg-copper-400 rotate-45 shrink-0 mr-2.5" />
                                   <span>{item.name}</span>
@@ -191,13 +191,13 @@ export const Navbar: React.FC = () => {
                   exit={{ opacity: 0, y: 10 }}
                   className="absolute left-1/2 z-50 top-full pt-3 -translate-x-1/2"
                 >
-                  <div className="w-[260px] rounded-2xl border border-sky-600/50 bg-navy-card p-6 shadow-2xl">
+                  <div className="w-[260px] rounded-2xl border border-sky-200/50 bg-cream-50 p-6 shadow-2xl">
                     <ul className="space-y-3">
                       <li>
                         <Link
                           href="/submit-resume"
                           onClick={closeMenus}
-                          className="flex items-center text-xs font-semibold text-sage-100/60 hover:text-white transition-all duration-200 hover:translate-x-1"
+                          className="flex items-center text-xs font-semibold text-navy-900/60 hover:text-navy-900 transition-all duration-200 hover:translate-x-1"
                         >
                           <span className="h-2 w-2 bg-copper-400 rotate-45 shrink-0 mr-2.5" />
                           <span>Submit your resume</span>
@@ -207,7 +207,7 @@ export const Navbar: React.FC = () => {
                         <Link
                           href="/vacancies"
                           onClick={closeMenus}
-                          className="flex items-center text-xs font-semibold text-sage-100/60 hover:text-white transition-all duration-200 hover:translate-x-1"
+                          className="flex items-center text-xs font-semibold text-navy-900/60 hover:text-navy-900 transition-all duration-200 hover:translate-x-1"
                         >
                           <span className="h-2 w-2 bg-copper-400 rotate-45 shrink-0 mr-2.5" />
                           <span>Current Vacancies</span>
