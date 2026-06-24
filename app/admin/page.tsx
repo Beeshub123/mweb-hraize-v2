@@ -40,8 +40,8 @@ export default function AdminPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-dark-bg flex items-center justify-center">
-        <div className="animate-spin h-8 w-8 border-2 border-teal border-t-transparent rounded-full" />
+      <div className="min-h-screen bg-cream-100 flex items-center justify-center">
+        <div className="animate-spin h-8 w-8 border-2 border-sky-600 border-t-transparent rounded-full" />
       </div>
     );
   }
@@ -76,50 +76,50 @@ function LoginForm({ onLogin }: { onLogin: (token: string) => void }) {
   };
 
   return (
-    <div className="min-h-screen bg-dark-bg flex items-center justify-center p-4">
+    <div className="min-h-screen bg-cream-100 flex items-center justify-center p-4">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-sm">
-        <div className="bg-dark-card rounded-2xl border border-slate-700 p-8 shadow-2xl">
+        <div className="bg-cream-50 rounded-2xl border border-navy-900/10 p-8 shadow-xl">
           <div className="flex items-center gap-3 mb-8">
-            <div className="h-10 w-10 rounded-xl bg-teal/20 flex items-center justify-center">
-              <Lock className="h-5 w-5 text-teal" />
+            <div className="h-10 w-10 rounded-xl bg-sky-600/10 flex items-center justify-center">
+              <Lock className="h-5 w-5 text-sky-600" />
             </div>
             <div>
-              <h1 className="text-lg font-black text-white uppercase tracking-tight">Admin</h1>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Sign in to continue</p>
+              <h1 className="text-lg font-black text-navy-900 uppercase tracking-tight">Admin</h1>
+              <p className="text-[10px] font-bold text-navy-900/50 uppercase tracking-wider">Sign in to continue</p>
             </div>
           </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Username</label>
+              <label className="text-[10px] font-bold uppercase tracking-wider text-navy-900/50 block mb-1">Username</label>
               <input
                 type="text" value={username} onChange={(e) => setUsername(e.target.value)}
-                className="w-full px-3 py-2.5 bg-dark-bg border border-slate-700 rounded-lg text-sm text-white font-medium focus:outline-none focus:border-teal transition-colors"
+                className="w-full px-3 py-2.5 bg-white border border-navy-900/15 rounded-lg text-sm text-navy-900 font-medium focus:outline-none focus:border-sky-600 transition-colors"
                 placeholder="admin"
               />
             </div>
             <div>
-              <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Password</label>
+              <label className="text-[10px] font-bold uppercase tracking-wider text-navy-900/50 block mb-1">Password</label>
               <div className="relative">
                 <input
                   type={showPw ? "text" : "password"} value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-3 py-2.5 pr-10 bg-dark-bg border border-slate-700 rounded-lg text-sm text-white font-medium focus:outline-none focus:border-teal transition-colors"
+                  className="w-full px-3 py-2.5 pr-10 bg-white border border-navy-900/15 rounded-lg text-sm text-navy-900 font-medium focus:outline-none focus:border-sky-600 transition-colors"
                   placeholder="Enter password"
                 />
-                <button type="button" onClick={() => setShowPw(!showPw)} className="absolute right-3 top-2.5 text-slate-500 hover:text-slate-300 cursor-pointer">
+                <button type="button" onClick={() => setShowPw(!showPw)} className="absolute right-3 top-2.5 text-navy-900/40 hover:text-navy-900/70 cursor-pointer">
                   {showPw ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
             </div>
             {error && (
-              <div className="flex items-center gap-2 text-xs font-bold text-red-400 bg-red-400/10 rounded-lg px-3 py-2">
+              <div className="flex items-center gap-2 text-xs font-bold text-red-muted bg-red-muted/10 rounded-lg px-3 py-2">
                 <AlertCircle className="h-4 w-4 flex-shrink-0" />
                 {error}
               </div>
             )}
             <button
               type="submit" disabled={submitting}
-              className="w-full py-2.5 bg-teal hover:bg-teal/90 disabled:opacity-50 text-white text-sm font-black uppercase tracking-wider rounded-lg transition-colors cursor-pointer"
+              className="w-full py-2.5 bg-sky-600 hover:bg-sky-700 disabled:opacity-50 text-white text-sm font-black uppercase tracking-wider rounded-lg transition-colors cursor-pointer"
             >
               {submitting ? "Signing in..." : "Sign In"}
             </button>
@@ -158,17 +158,17 @@ function AdminDashboard({ token, onLogout, tab, onTabChange }: {
   };
 
   return (
-    <div className="min-h-screen bg-dark-bg">
-      <header className="border-b border-slate-800 bg-dark-card">
+    <div className="min-h-screen bg-cream-100">
+      <header className="border-b border-navy-900/10 bg-cream-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-3">
-              <div className="h-8 w-8 rounded-lg bg-teal/20 flex items-center justify-center">
-                <Lock className="h-4 w-4 text-teal" />
+              <div className="h-8 w-8 rounded-lg bg-sky-600/10 flex items-center justify-center">
+                <Lock className="h-4 w-4 text-sky-600" />
               </div>
-              <span className="text-base font-black text-white uppercase tracking-tight">Admin Panel</span>
+              <span className="text-base font-black text-navy-900 uppercase tracking-tight">Admin Panel</span>
             </div>
-            <button onClick={onLogout} className="flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-white transition-colors cursor-pointer">
+            <button onClick={onLogout} className="flex items-center gap-1.5 text-xs font-bold text-navy-900/50 hover:text-navy-900 transition-colors cursor-pointer">
               <LogOut className="h-4 w-4" /> Sign Out
             </button>
           </div>
@@ -179,13 +179,13 @@ function AdminDashboard({ token, onLogout, tab, onTabChange }: {
         <div className="flex items-center gap-1 mb-6">
           <button onClick={() => onTabChange("careers")}
             className={`px-4 py-2 text-xs font-black uppercase tracking-wider rounded-lg transition-all cursor-pointer ${
-              tab === "careers" ? "bg-teal text-white shadow-lg shadow-teal/20" : "text-slate-400 hover:text-white hover:bg-slate-800"
+              tab === "careers" ? "bg-sky-600 text-white shadow-lg shadow-sky-600/20" : "text-navy-900/50 hover:text-navy-900 hover:bg-sky-600/5"
             }`}>
             <Briefcase className="h-3.5 w-3.5 inline mr-1.5" /> Careers
           </button>
           <button onClick={() => onTabChange("settings")}
             className={`px-4 py-2 text-xs font-black uppercase tracking-wider rounded-lg transition-all cursor-pointer ${
-              tab === "settings" ? "bg-teal text-white shadow-lg shadow-teal/20" : "text-slate-400 hover:text-white hover:bg-slate-800"
+              tab === "settings" ? "bg-sky-600 text-white shadow-lg shadow-sky-600/20" : "text-navy-900/50 hover:text-navy-900 hover:bg-sky-600/5"
             }`}>
             <Settings className="h-3.5 w-3.5 inline mr-1.5" /> Settings
           </button>
@@ -195,7 +195,7 @@ function AdminDashboard({ token, onLogout, tab, onTabChange }: {
           {message && (
             <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
               className={`mb-4 flex items-center gap-2 text-xs font-bold rounded-lg px-4 py-3 ${
-                message.type === "success" ? "text-emerald-400 bg-emerald-400/10" : "text-red-400 bg-red-400/10"
+                message.type === "success" ? "text-forest-500 bg-forest-500/10" : "text-red-muted bg-red-muted/10"
               }`}
             >
               {message.type === "success" ? <CheckCircle className="h-4 w-4" /> : <AlertCircle className="h-4 w-4" />}
@@ -258,21 +258,21 @@ function SettingsPanel({ token, showMessage }: {
 
   return (
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }}>
-      <div className="bg-dark-card rounded-2xl border border-slate-700 p-6 sm:p-8 max-w-lg">
+      <div className="bg-cream-50 rounded-2xl border border-navy-900/10 p-6 sm:p-8 max-w-lg">
         <div className="flex items-center gap-3 mb-6">
-          <div className="h-9 w-9 rounded-lg bg-teal/20 flex items-center justify-center">
-            <Lock className="h-4 w-4 text-teal" />
+          <div className="h-9 w-9 rounded-lg bg-sky-600/10 flex items-center justify-center">
+            <Lock className="h-4 w-4 text-sky-600" />
           </div>
           <div>
-            <h2 className="text-sm font-black text-white uppercase tracking-tight">Change Password</h2>
-            <p className="text-[10px] font-bold text-slate-400">Update your admin password</p>
+            <h2 className="text-sm font-black text-navy-900 uppercase tracking-tight">Change Password</h2>
+            <p className="text-[10px] font-bold text-navy-900/50">Update your admin password</p>
           </div>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {["current", "new", "confirm"].map((field) => (
             <div key={field}>
-              <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
+              <label className="text-[10px] font-bold uppercase tracking-wider text-navy-900/50 block mb-1">
                 {field === "current" ? "Current Password" : field === "new" ? "New Password" : "Confirm New Password"}
               </label>
               <div className="relative">
@@ -285,11 +285,11 @@ function SettingsPanel({ token, showMessage }: {
                     else if (field === "new") setNewPassword(val);
                     else setConfirmPassword(val);
                   }}
-                  className="w-full px-3 py-2.5 pr-10 bg-dark-bg border border-slate-700 rounded-lg text-sm text-white font-medium focus:outline-none focus:border-teal"
+                  className="w-full px-3 py-2.5 pr-10 bg-white border border-navy-900/15 rounded-lg text-sm text-navy-900 font-medium focus:outline-none focus:border-sky-600"
                   placeholder="••••••••"
                 />
                 <button type="button" onClick={() => setShowPw({ ...showPw, [field]: !showPw[field as keyof typeof showPw] })}
-                  className="absolute right-3 top-2.5 text-slate-500 hover:text-slate-300 cursor-pointer">
+                  className="absolute right-3 top-2.5 text-navy-900/40 hover:text-navy-900/70 cursor-pointer">
                   {showPw[field as keyof typeof showPw] ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
@@ -297,9 +297,9 @@ function SettingsPanel({ token, showMessage }: {
           ))}
 
           {errors.length > 0 && (
-            <div className="bg-red-400/10 rounded-lg px-3 py-2">
+            <div className="bg-red-muted/10 rounded-lg px-3 py-2">
               {errors.map((err, i) => (
-                <p key={i} className="text-[11px] font-medium text-red-400 flex items-center gap-1.5">
+                <p key={i} className="text-[11px] font-medium text-red-muted flex items-center gap-1.5">
                   <AlertCircle className="h-3 w-3 flex-shrink-0" /> {err}
                 </p>
               ))}
@@ -307,7 +307,7 @@ function SettingsPanel({ token, showMessage }: {
           )}
 
           <button type="submit" disabled={submitting}
-            className="w-full py-2.5 bg-teal hover:bg-teal/90 disabled:opacity-50 text-white text-sm font-black uppercase tracking-wider rounded-lg transition-colors cursor-pointer">
+            className="w-full py-2.5 bg-sky-600 hover:bg-sky-700 disabled:opacity-50 text-white text-sm font-black uppercase tracking-wider rounded-lg transition-colors cursor-pointer">
             {submitting ? "Updating..." : "Update Password"}
           </button>
         </form>
@@ -379,38 +379,38 @@ function CareersPanel({ token, vacancies, loading, onUpdate, showMessage, onLogo
 
   return (
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }}>
-      <div className="bg-dark-card rounded-2xl border border-slate-700 overflow-hidden">
-        <div className="p-4 sm:p-6 border-b border-slate-700 flex items-center justify-between">
+      <div className="bg-cream-50 rounded-2xl border border-navy-900/10 overflow-hidden">
+        <div className="p-4 sm:p-6 border-b border-navy-900/10 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="h-9 w-9 rounded-lg bg-teal/20 flex items-center justify-center">
-              <Briefcase className="h-4 w-4 text-teal" />
+            <div className="h-9 w-9 rounded-lg bg-sky-600/10 flex items-center justify-center">
+              <Briefcase className="h-4 w-4 text-sky-600" />
             </div>
             <div>
-              <h2 className="text-sm font-black text-white uppercase tracking-tight">Careers Management</h2>
-              <p className="text-[10px] font-bold text-slate-400">{vacancies.length} vacancy post{vacancies.length !== 1 ? "s" : ""}</p>
+              <h2 className="text-sm font-black text-navy-900 uppercase tracking-tight">Careers Management</h2>
+              <p className="text-[10px] font-bold text-navy-900/50">{vacancies.length} vacancy post{vacancies.length !== 1 ? "s" : ""}</p>
             </div>
           </div>
           <button onClick={openCreate}
-            className="flex items-center gap-1.5 px-3 py-2 bg-teal hover:bg-teal/90 text-white text-xs font-black uppercase tracking-wider rounded-lg transition-colors cursor-pointer">
+            className="flex items-center gap-1.5 px-3 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-black uppercase tracking-wider rounded-lg transition-colors cursor-pointer">
             <Plus className="h-3.5 w-3.5" /> Add Vacancy
           </button>
         </div>
 
         {loading ? (
           <div className="p-12 text-center">
-            <div className="animate-spin h-6 w-6 border-2 border-teal border-t-transparent rounded-full mx-auto" />
+            <div className="animate-spin h-6 w-6 border-2 border-sky-600 border-t-transparent rounded-full mx-auto" />
           </div>
         ) : vacancies.length === 0 ? (
           <div className="p-12 text-center">
-            <Briefcase className="h-10 w-10 text-slate-600 mx-auto mb-3" />
-            <p className="text-sm font-bold text-slate-400">No vacancies yet</p>
-            <p className="text-xs text-slate-500 mt-1">Create your first vacancy posting</p>
+            <Briefcase className="h-10 w-10 text-navy-900/30 mx-auto mb-3" />
+            <p className="text-sm font-bold text-navy-900/50">No vacancies yet</p>
+            <p className="text-xs text-navy-900/40 mt-1">Create your first vacancy posting</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead>
-                <tr className="border-b border-slate-700 text-[10px] font-black uppercase tracking-wider text-slate-500">
+                <tr className="border-b border-navy-900/10 text-[10px] font-black uppercase tracking-wider text-navy-900/40">
                   <th className="px-4 sm:px-6 py-3">Title</th>
                   <th className="px-4 py-3 hidden md:table-cell">Department</th>
                   <th className="px-4 py-3 hidden sm:table-cell">Location</th>
@@ -420,32 +420,32 @@ function CareersPanel({ token, vacancies, loading, onUpdate, showMessage, onLogo
               </thead>
               <tbody>
                 {vacancies.map((v) => (
-                  <tr key={v.id} className="border-b border-slate-800 hover:bg-slate-800/50 transition-colors">
+                  <tr key={v.id} className="border-b border-navy-900/10 hover:bg-sky-600/5 transition-colors">
                     <td className="px-4 sm:px-6 py-3">
-                      <p className="text-sm font-bold text-white">{v.title}</p>
-                      <p className="text-[10px] text-slate-500 mt-0.5">{v.experience}</p>
+                      <p className="text-sm font-bold text-navy-900">{v.title}</p>
+                      <p className="text-[10px] text-navy-900/40 mt-0.5">{v.experience}</p>
                     </td>
                     <td className="px-4 py-3 hidden md:table-cell">
-                      <span className="text-xs text-slate-300">{v.department}</span>
+                      <span className="text-xs text-navy-900/70">{v.department}</span>
                     </td>
                     <td className="px-4 py-3 hidden sm:table-cell">
-                      <span className="text-xs text-slate-300">{v.location}</span>
+                      <span className="text-xs text-navy-900/70">{v.location}</span>
                     </td>
                     <td className="px-4 py-3">
                       <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${
-                        v.type === "Full-Time" ? "bg-emerald-400/10 text-emerald-400" :
-                        v.type === "Contract" ? "bg-amber-400/10 text-amber-400" :
-                        "bg-blue-400/10 text-blue-400"
+                        v.type === "Full-Time" ? "bg-forest-500/10 text-forest-500" :
+                        v.type === "Contract" ? "bg-copper-400/10 text-copper-400" :
+                        "bg-sky-500/10 text-sky-500"
                       }`}>{v.type}</span>
                     </td>
                     <td className="px-4 py-3 text-right">
                       <div className="flex items-center justify-end gap-1">
                         <button onClick={() => openEdit(v)}
-                          className="p-1.5 rounded-lg text-slate-500 hover:text-teal hover:bg-slate-800 transition-colors cursor-pointer">
+                          className="p-1.5 rounded-lg text-navy-900/40 hover:text-sky-600 hover:bg-sky-600/5 transition-colors cursor-pointer">
                           <Pencil className="h-4 w-4" />
                         </button>
                         <button onClick={() => setDeleteTarget(v)}
-                          className="p-1.5 rounded-lg text-slate-500 hover:text-red-400 hover:bg-slate-800 transition-colors cursor-pointer">
+                          className="p-1.5 rounded-lg text-navy-900/40 hover:text-red-muted hover:bg-sky-600/5 transition-colors cursor-pointer">
                           <Trash2 className="h-4 w-4" />
                         </button>
                       </div>
@@ -460,15 +460,15 @@ function CareersPanel({ token, vacancies, loading, onUpdate, showMessage, onLogo
 
       <AnimatePresence>
         {modal.open && (
-          <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-50 overflow-y-auto bg-navy-900/50 backdrop-blur-sm flex items-center justify-center p-4">
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-dark-card rounded-2xl border border-slate-700 w-full max-w-2xl shadow-2xl overflow-hidden">
-              <div className="flex items-center justify-between p-4 sm:p-6 border-b border-slate-700">
-                <h3 className="text-sm font-black text-white uppercase tracking-tight">
+              className="bg-cream-50 rounded-2xl border border-navy-900/10 w-full max-w-2xl shadow-xl overflow-hidden">
+              <div className="flex items-center justify-between p-4 sm:p-6 border-b border-navy-900/10">
+                <h3 className="text-sm font-black text-navy-900 uppercase tracking-tight">
                   {modal.edit ? "Edit Vacancy" : "Create Vacancy"}
                 </h3>
                 <button onClick={() => setModal({ open: false })}
-                  className="h-8 w-8 rounded-lg hover:bg-slate-800 flex items-center justify-center text-slate-500 hover:text-white transition-colors cursor-pointer">
+                  className="h-8 w-8 rounded-lg hover:bg-sky-600/5 flex items-center justify-center text-navy-900/40 hover:text-navy-900 transition-colors cursor-pointer">
                   <X className="h-4 w-4" />
                 </button>
               </div>
@@ -476,18 +476,18 @@ function CareersPanel({ token, vacancies, loading, onUpdate, showMessage, onLogo
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {(["title", "department", "location", "experience", "salary"] as const).map((field) => (
                     <div key={field} className={field === "title" ? "sm:col-span-2" : ""}>
-                      <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
+                      <label className="text-[10px] font-bold uppercase tracking-wider text-navy-900/50 block mb-1">
                         {field === "salary" ? "Salary (optional)" : field.charAt(0).toUpperCase() + field.slice(1)}
                       </label>
                       <input type="text" value={form[field] || ""} onChange={(e) => setForm({ ...form, [field]: e.target.value })}
-                        className="w-full px-3 py-2.5 bg-dark-bg border border-slate-700 rounded-lg text-sm text-white font-medium focus:outline-none focus:border-teal"
+                        className="w-full px-3 py-2.5 bg-white border border-navy-900/15 rounded-lg text-sm text-navy-900 font-medium focus:outline-none focus:border-sky-600"
                         placeholder={field === "salary" ? "e.g. ₹18,00,000 - ₹24,00,000" : `Enter ${field}`} />
                     </div>
                   ))}
                   <div>
-                    <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Type</label>
+                    <label className="text-[10px] font-bold uppercase tracking-wider text-navy-900/50 block mb-1">Type</label>
                     <select value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value as JobVacancy["type"] })}
-                      className="w-full px-3 py-2.5 bg-dark-bg border border-slate-700 rounded-lg text-sm text-white font-medium focus:outline-none focus:border-teal">
+                      className="w-full px-3 py-2.5 bg-white border border-navy-900/15 rounded-lg text-sm text-navy-900 font-medium focus:outline-none focus:border-sky-600">
                       <option value="Full-Time">Full-Time</option>
                       <option value="Contract">Contract</option>
                       <option value="Internship">Internship</option>
@@ -496,17 +496,17 @@ function CareersPanel({ token, vacancies, loading, onUpdate, showMessage, onLogo
                 </div>
 
                 <div>
-                  <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Description</label>
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-navy-900/50 block mb-1">Description</label>
                   <textarea rows={3} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })}
-                    className="w-full px-3 py-2.5 bg-dark-bg border border-slate-700 rounded-lg text-sm text-white font-medium focus:outline-none focus:border-teal resize-none"
+                    className="w-full px-3 py-2.5 bg-white border border-navy-900/15 rounded-lg text-sm text-navy-900 font-medium focus:outline-none focus:border-sky-600 resize-none"
                     placeholder="Enter job description" />
                 </div>
 
                 <div>
                   <div className="flex items-center justify-between mb-1">
-                    <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Requirements</label>
+                    <label className="text-[10px] font-bold uppercase tracking-wider text-navy-900/50">Requirements</label>
                     <button type="button" onClick={addRequirement}
-                      className="text-[10px] font-bold text-teal hover:text-blue-400 transition-colors cursor-pointer">+ Add requirement</button>
+                      className="text-[10px] font-bold text-sky-600 hover:text-sky-700 transition-colors cursor-pointer">+ Add requirement</button>
                   </div>
                   <div className="space-y-2">
                     {form.requirements.map((req, i) => (
@@ -516,10 +516,10 @@ function CareersPanel({ token, vacancies, loading, onUpdate, showMessage, onLogo
                           reqs[i] = e.target.value;
                           setForm({ ...form, requirements: reqs });
                         }}
-                          className="flex-1 px-3 py-2 bg-dark-bg border border-slate-700 rounded-lg text-sm text-white font-medium focus:outline-none focus:border-teal"
+                          className="flex-1 px-3 py-2 bg-white border border-navy-900/15 rounded-lg text-sm text-navy-900 font-medium focus:outline-none focus:border-sky-600"
                           placeholder="Requirement" />
                         <button type="button" onClick={() => removeRequirement(i)}
-                          className="p-2 text-slate-500 hover:text-red-400 transition-colors cursor-pointer">
+                          className="p-2 text-navy-900/40 hover:text-red-muted transition-colors cursor-pointer">
                           <X className="h-3.5 w-3.5" />
                         </button>
                       </div>
@@ -527,13 +527,13 @@ function CareersPanel({ token, vacancies, loading, onUpdate, showMessage, onLogo
                   </div>
                 </div>
 
-                <div className="pt-2 flex items-center justify-end gap-3 border-t border-slate-700">
+                <div className="pt-2 flex items-center justify-end gap-3 border-t border-navy-900/10">
                   <button type="button" onClick={() => setModal({ open: false })}
-                    className="px-4 py-2 text-xs font-bold text-slate-400 hover:text-white transition-colors cursor-pointer">
+                    className="px-4 py-2 text-xs font-bold text-navy-900/50 hover:text-navy-900 transition-colors cursor-pointer">
                     Cancel
                   </button>
                   <button type="submit" disabled={submitting}
-                    className="px-6 py-2 bg-teal hover:bg-teal/90 disabled:opacity-50 text-white text-xs font-black uppercase tracking-wider rounded-lg transition-colors cursor-pointer">
+                    className="px-6 py-2 bg-sky-600 hover:bg-sky-700 disabled:opacity-50 text-white text-xs font-black uppercase tracking-wider rounded-lg transition-colors cursor-pointer">
                     {submitting ? "Saving..." : modal.edit ? "Update Vacancy" : "Create Vacancy"}
                   </button>
                 </div>
@@ -545,28 +545,28 @@ function CareersPanel({ token, vacancies, loading, onUpdate, showMessage, onLogo
 
       <AnimatePresence>
         {deleteTarget && (
-          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-50 bg-navy-900/50 backdrop-blur-sm flex items-center justify-center p-4">
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-dark-card rounded-2xl border border-slate-700 w-full max-w-sm p-6 shadow-2xl">
+              className="bg-cream-50 rounded-2xl border border-navy-900/10 w-full max-w-sm p-6 shadow-xl">
               <div className="flex items-center gap-3 mb-4">
-                <div className="h-10 w-10 rounded-xl bg-red-400/10 flex items-center justify-center">
-                  <AlertCircle className="h-5 w-5 text-red-400" />
+                <div className="h-10 w-10 rounded-xl bg-red-muted/10 flex items-center justify-center">
+                  <AlertCircle className="h-5 w-5 text-red-muted" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-black text-white uppercase tracking-tight">Delete Vacancy</h3>
-                  <p className="text-[10px] font-bold text-slate-400">This action cannot be undone</p>
+                  <h3 className="text-sm font-black text-navy-900 uppercase tracking-tight">Delete Vacancy</h3>
+                  <p className="text-[10px] font-bold text-navy-900/50">This action cannot be undone</p>
                 </div>
               </div>
-              <p className="text-xs text-slate-300 mb-6">
-                Are you sure you want to delete <span className="font-bold text-white">&quot;{deleteTarget.title}&quot;</span>?
+              <p className="text-xs text-navy-900/70 mb-6">
+                Are you sure you want to delete <span className="font-bold text-navy-900">&quot;{deleteTarget.title}&quot;</span>?
               </p>
               <div className="flex items-center justify-end gap-3">
                 <button onClick={() => setDeleteTarget(null)}
-                  className="px-4 py-2 text-xs font-bold text-slate-400 hover:text-white transition-colors cursor-pointer">
+                  className="px-4 py-2 text-xs font-bold text-navy-900/50 hover:text-navy-900 transition-colors cursor-pointer">
                   Cancel
                 </button>
                 <button onClick={handleDelete}
-                  className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white text-xs font-black uppercase tracking-wider rounded-lg transition-colors cursor-pointer">
+                  className="px-4 py-2 bg-red-muted hover:bg-red-muted-dark text-white text-xs font-black uppercase tracking-wider rounded-lg transition-colors cursor-pointer">
                   Delete
                 </button>
               </div>
