@@ -139,7 +139,7 @@ export default function SubmitResumePage() {
           </p>
         </div>
 
-        <div className="relative bg-cream-50 rounded-3xl shadow-xl border border-sky-600/50 overflow-hidden">
+        <div className="relative bg-navy-600/5 rounded-3xl shadow-xl border border-sky-600/50 overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1.5" />
           <div className="p-8 sm:p-10">
             {formErrors.length > 0 && (
