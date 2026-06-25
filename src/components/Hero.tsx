@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
 import { ArrowRight, Calendar, Users, ShieldCheck, Award, TrendingUp } from "lucide-react";
@@ -71,6 +71,14 @@ export const Hero: React.FC<HeroProps> = ({ onGetStarted }) => {
     { id: 3, name: "Elena R.", url: "/contact-3.png" },
     { id: 4, name: "Marcus T.", url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80" }
   ];
+
+  const parseStat = (value: string) => {
+    const match = value.match(/^(\d+)(.*)$/);
+    if (match) {
+      return { target: parseInt(match[1], 10), suffix: match[2] };
+    }
+    return { target: 0, suffix: value };
+  };
 
   const stats = [
     { value: "20+", label: "Years Global Experience", icon: Calendar },
@@ -371,34 +379,111 @@ export const Hero: React.FC<HeroProps> = ({ onGetStarted }) => {
             <rect width="100%" height="100%" fill="url(#stats-grid)" />
           </svg>
         </div>
-        <div className="absolute top-0 right-0 h-[300px] w-[300px] rounded-full bg-sky-500/10 blur-3xl" />
-        <div className="absolute bottom-0 left-0 h-[250px] w-[250px] rounded-full bg-copper-400/5 blur-3xl" />
+        <motion.div
+          className="absolute top-0 right-0 h-[300px] w-[300px] rounded-full bg-sky-500/10 blur-3xl"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.15, 0.1] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-0 left-0 h-[250px] w-[250px] rounded-full bg-copper-400/5 blur-3xl"
+          animate={{ scale: [1, 1.3, 1], opacity: [0.05, 0.1, 0.05] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        />
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+          <motion.div
+            className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={{
+              visible: { transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
+              hidden: {},
+            }}
+          >
             {stats.map((stat, idx) => {
               const Icon = stat.icon;
+              const { target, suffix } = parseStat(stat.value);
               return (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 + idx * 0.12, ease: "easeOut" }}
-                  className="flex flex-col items-center text-center gap-3"
+                  variants={{
+                    hidden: { opacity: 0, y: 30, scale: 0.9 },
+                    visible: { opacity: 1, y: 0, scale: 1 },
+                  }}
+                  transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+                  className="flex flex-col items-center text-center gap-3 group"
                 >
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl text-sky-400">
+                  <motion.div
+                    className="flex h-14 w-14 items-center justify-center rounded-2xl text-sky-400"
+                    whileHover={{ scale: 1.15, rotate: [0, -10, 10, -5, 0] }}
+                    transition={{ duration: 0.4 }}
+                  >
                     <Icon className="h-12 w-12" />
-                  </div>
+                  </motion.div>
                   <div>
-                    <span className="text-4xl lg:text-4xl font-black text-white block leading-none tracking-tight">{stat.value}</span>
+                    <RollingNumber target={target} suffix={suffix} delay={idx * 150} />
                     <span className="text-[13px] font-bold text-white/80 uppercase leading-tight block mt-1.5 tracking-widest">{stat.label}</span>
                   </div>
                 </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
   );
 };
+
+/** A simple rolling-digit counter that animates after mount+delay */
+function RollingNumber({ target, suffix = "", delay = 0 }: { target: number; suffix?: string; delay?: number }) {
+  const [display, setDisplay] = useState("");
+  const digits = String(target);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      // Start with random digits
+      setDisplay(digits.split("").map(() => Math.floor(Math.random() * 10)).join(""));
+
+      const totalDuration = 1800;
+      const perDigitStagger = 100;
+      const interval = 40;
+      let elapsed = 0;
+
+      const timer = setInterval(() => {
+        elapsed += interval;
+        const progress = Math.min(elapsed / totalDuration, 1);
+
+        if (progress >= 1) {
+          setDisplay(digits);
+          clearInterval(timer);
+          return;
+        }
+
+        const rolled = digits.split("").map((finalChar, idx) => {
+          const start = idx * perDigitStagger;
+          const dur = totalDuration - start;
+          if (dur <= 0) return finalChar;
+          const dp = Math.max(0, elapsed - start) / dur;
+          if (dp >= 1) return finalChar;
+          const cycles = 5;
+          if (Math.floor(dp * cycles) >= cycles - 1) return finalChar;
+          return Math.floor(Math.random() * 10).toString();
+        });
+
+        setDisplay(rolled.join(""));
+      }, interval);
+
+      return () => clearInterval(timer);
+    }, delay);
+
+    return () => clearTimeout(timeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [delay]);
+
+  return (
+    <span className="text-4xl lg:text-4xl font-black text-white block leading-none tracking-tight tabular-nums">
+      {display || digits}{suffix}
+    </span>
+  );
+}
