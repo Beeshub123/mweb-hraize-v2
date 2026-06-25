@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { GoogleTagManager } from '@next/third-parties/google'
+import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google'
 
 
 export const metadata: Metadata = {
@@ -41,7 +41,7 @@ export default function RootLayout({
       <body suppressHydrationWarning className="min-h-screen bg-cream-100 font-sans antialiased">
         {children}
       </body>
-      <GoogleTagManager gtmId="G-MRQPNLMK59" />
+      <GoogleAnalytics gaId="G-MRQPNLMK59" />
     </html>
   );
 }
